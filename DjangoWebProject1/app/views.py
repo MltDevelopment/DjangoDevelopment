@@ -43,3 +43,18 @@ def about(request):
             'year':datetime.now().year,
         }
     )
+def page_not_found(request,exception,template_name='error/404.html'):
+    
+    return render(request,template_name)
+
+def page_error(request,template_name='error/500.html'):
+    #404
+    return render(request,template_name)
+
+def permission_denied(request,exception,template_name='error/403.html'):
+    #403
+    return render(request, template_name)
+
+def bad_request(request,exception,template_name='error/400.html'):
+    #400
+    return render(request, temptale_name)
