@@ -29,6 +29,8 @@ class predict_model(object):
 
     #训练集获取
     def set_train(self,X_train,Y_train):
+        X_marixadd=np.ones((len(X),1))
+        X_train=np.hstack((X_train,X_marixadd))
         self.X_train=X_train
         self.Y_train=Y_train
         self.m=len(self.X_train)
@@ -57,7 +59,7 @@ class predict_model(object):
     #梯度计算函数
     def gradient_function(self):
         temp =100*(2/(1+e**np.dot(self.X_train,-self.theta))-1)-self.Y_train
-        return (1/self.m)*np.dot(X.transpose(),temp)
+        return (1/self.m)*np.dot(self.X_train.transpose(),temp)
 
     #迭代函数
     def gradient_descent(self):
@@ -86,14 +88,16 @@ class predict_model(object):
 
 #测试
 X=[[1,0.98],[1,0.98],[1,0.98],[1,0.98],
-   [2,1.0],[2,1.0],[2,1.0],[2,1.0],[3,0.97],[3,0.97],[3,0.97],[3,0.97],
-   [4,1.01],[4,1.01],[4,1.01],[4,1.01],[5,1.05],[5,1.05],[5,1.05],[5,1.05],
+   [2,1.0],[2,1.0],[2,1.0],[2,1.0],
+   [3,0.97],[3,0.97],[3,0.97],[3,0.97],
+   [4,1.01],[4,1.01],[4,1.01],[4,1.01],
+   [5,1.05],[5,1.05],[5,1.05],[5,1.05],
    [6,1.03],[6,1.03],[6,1.03],[6,1.03]]
-X_marixadd=np.ones((len(X),1))
-X=np.hstack((X,X_marixadd))
 Y=[[82],[80],[90],[90],
-   [79],[82],[82],[84],[89],[90],[91],[92],
-   [80],[71],[78],[82],[63],[64],[66],[68],
+   [79],[82],[82],[84],
+   [89],[90],[91],[92],
+   [80],[71],[78],[82],
+   [63],[64],[66],[68],
    [70],[67],[69],[71],]
 
 model1=predict_model()
