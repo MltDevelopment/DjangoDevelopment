@@ -57,6 +57,13 @@
     <Folder Include="DjangoWebProject1\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\index.html" />
+    <Content Include="app\templates\app\layoutnav.html" />
+    <Content Include="app\templates\app\datas_serach.html" />
+    <Content Include="app\templates\app\datas_change.html" />
+    <Content Include="app\templates\app\class_predict.html" />
+    <Content Include="app\templates\app\subject_predict.html" />
+    <Content Include="app\templates\app\subject_analysis.html" />
     <Content Include="app\templates\error\400.html" />
     <Content Include="app\templates\error\403.html" />
     <Content Include="app\templates\error\404.html" />
@@ -85,9 +92,8 @@
     <Content Include="app\static\app\scripts\respond.js" />
     <Content Include="app\static\app\scripts\respond.min.js" />
     <Content Include="app\static\app\scripts\_references.js" />
-    <Content Include="app\templates\app\about.html" />
-    <Content Include="app\templates\app\contact.html" />
-    <Content Include="app\templates\app\index.html" />
+    <Content Include="app\templates\app\class_analysis.html" />
+    <Content Include="app\templates\app\detail_analysis.html" />
     <Content Include="app\templates\app\layout.html" />
     <Content Include="app\templates\app\login.html" />
     <Content Include="app\templates\app\loginpartial.html" />

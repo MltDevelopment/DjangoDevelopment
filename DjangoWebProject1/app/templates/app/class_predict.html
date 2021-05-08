@@ -1,0 +1,19 @@
+{% extends "app/layoutnav.html" %}
+
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+
+<p>在此页面开发班级{{ title }}页面.</p>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    function navset() {
+        var navs = document.getElementById("predict")
+        navs.setAttribute("class", "active")
+    }
+    window.onload = navset();
+</script>
+{% endblock %}

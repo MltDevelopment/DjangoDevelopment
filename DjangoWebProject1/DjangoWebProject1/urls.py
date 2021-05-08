@@ -10,9 +10,14 @@ from app import forms, views
 
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('contact/', views.contact, name='contact'),
-    path('about/', views.about, name='about'),
+    path('', views.overview, name='home'),
+    path('dataschange/', views.datas_change, name='dataschange'),
+    path('dataserach/', views.datas_serach, name='dataserach'),
+    path('subjectpredict/', views.subject_predict, name='subjectpredict'),
+    path('classpredict/', views.class_predict, name='classpredict'),
+    path('classanalysis/', views.class_analysis, name='classanalysis'),
+    path('subjectanalysis/', views.subject_analysis, name='subjectanalysis'),
+    path('detailanalysis/', views.detail_analysis, name='detailanalysis'),
     path('login/',
          LoginView.as_view
          (
