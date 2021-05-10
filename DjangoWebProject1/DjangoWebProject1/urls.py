@@ -12,7 +12,7 @@ from app import forms, views
 urlpatterns = [
     path('', views.overview, name='home'),
     path('dataschange/', views.datas_change, name='dataschange'),
-    path('dataserach/', views.datas_serach, name='dataserach'),
+    path('datasearch/', views.datas_search, name='datasearch'),
     path('subjectpredict/', views.subject_predict, name='subjectpredict'),
     path('classpredict/', views.class_predict, name='classpredict'),
     path('classanalysis/', views.class_analysis, name='classanalysis'),

@@ -39,12 +39,12 @@ def datas_change(request):
         }
     )
 
-def datas_serach(request):
+def datas_search(request):
     """Renders the datas page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
-        'app/datas_serach.html',
+        'app/datas_search.html',
         {
             'title':'Datas',
             'message':'database contrl page.',

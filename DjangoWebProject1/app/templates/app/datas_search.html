@@ -1,0 +1,240 @@
+{% extends "app/layoutnav.html" %}
+
+{% block content %}
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <form action="." method="post" class="form-horizontal" style="padding: 5px;">
+                        <div class="header card-header-text">
+                            <h4 class="title">搜索</h4>
+                        </div>
+                        {% csrf_token %}
+                        <div class="contect">
+                            <fieldset>
+                                <label class="col-sm-2 control-label">Gsearch</label>
+                                <div class="col-sm-8">
+                                        <input type="text" class="form-control">
+                                        <span class="help-block">目前只支持搜索学号</span>
+                                </div>
+                                <button class="btn btn-rose ti-search" type="submit"> 搜索</button>
+                            </fieldset>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4"style="min-height:550px;">
+                <div class="card">
+                    <div id="chartsearch" style="width: 100%;min-height:500px;"></div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8" style="min-height:300px;">
+                <div class="card">
+                    <div class="content">
+                        <h4 class="title">SearchData</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">次数</th>
+                                        <th></th>
+                                        <th>语文</th>
+                                        <th>数学</th>
+                                        <th>英语</th>
+                                        <th>物理</th>
+                                        <th class="text-right">化学</th>
+                                        <th class="text-right">生物</th>
+                                        <th class="text-right">总分</th>
+                                        <th class="text-right">排名</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-center">1</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="optionsCheckboxes" checked>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>111</td>
+                                        <td>121</td>
+                                        <td>101</td>
+                                        <td>101</td>
+                                        <td class="text-right">78</td>
+                                        <td class="text-right">88</td>
+                                        <td class="text-right">600</td>
+                                        <td class="text-right">88</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">2</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="optionsCheckboxes" checked>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>111</td>
+                                        <td>121</td>
+                                        <td>101</td>
+                                        <td>101</td>
+                                        <td class="text-right">78</td>
+                                        <td class="text-right">88</td>
+                                        <td class="text-right">600</td>
+                                        <td class="text-right">88</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">3</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="optionsCheckboxes" checked>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>111</td>
+                                        <td>121</td>
+                                        <td>101</td>
+                                        <td>101</td>
+                                        <td class="text-right">78</td>
+                                        <td class="text-right">88</td>
+                                        <td class="text-right">600</td>
+                                        <td class="text-right">88</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">4</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="optionsCheckboxes">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>111</td>
+                                        <td>121</td>
+                                        <td>101</td>
+                                        <td>101</td>
+                                        <td class="text-right">78</td>
+                                        <td class="text-right">88</td>
+                                        <td class="text-right">600</td>
+                                        <td class="text-right">88</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">5</td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" name="optionsCheckboxes">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>111</td>
+                                        <td>121</td>
+                                        <td>101</td>
+                                        <td>101</td>
+                                        <td class="text-right">78</td>
+                                        <td class="text-right">88</td>
+                                        <td class="text-right">600</td>
+                                        <td class="text-right">88</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+    function navset() {
+        var navs = document.getElementById("datas")
+        var navsin = document.getElementById("datas_search")
+        navs.setAttribute("class", "active")
+        navsin.setAttribute("class", "active")
+    }
+    window.onload = navset();
+</script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('chartsearch'));
+    var option;
+    // 指定图表的配置项和数据
+    option = {
+        title: {
+            top: '5%',
+            text: '成绩走势'
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: ['语文', '数学', '英语', '物理', '化学', '生物']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        toolbox: {
+            right: '5%',
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['一模', '二模', '三模', '四模', '五模', '六模', '高考']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [
+            {
+                name: '语文',
+                type: 'line',
+                data: [120, 132, 111, 134, 90, 130, 129]
+            },
+            {
+                name: '数学',
+                type: 'line',
+                data: [132, 119, 121, 115, 131, 129, 111]
+            },
+            {
+                name: '英语',
+                type: 'line',
+                data: [140, 132, 101, 144, 120, 125, 110]
+            },
+            {
+                name: '物理',
+                type: 'line',
+                data: [80, 90, 101, 95, 86, 98, 80]
+            },
+            {
+                name: '化学',
+                type: 'line',
+                data: [80, 70, 78, 76, 68, 88, 97]
+            },
+            {
+                name: '生物',
+                type: 'line',
+                data: [68, 82, 88, 79, 90, 76, 69]
+            }
+
+        ]
+    };
+    window.onresize = function () { myChart.resize(); }
+    // 使用刚指定的配置项和数据显示图表。
+    option && myChart.setOption(option);
+</script>
+{% endblock %}

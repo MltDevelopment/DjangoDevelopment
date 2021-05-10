@@ -59,7 +59,7 @@
   <ItemGroup>
     <Content Include="app\templates\app\index.html" />
     <Content Include="app\templates\app\layoutnav.html" />
-    <Content Include="app\templates\app\datas_serach.html" />
+    <Content Include="app\templates\app\datas_search.html" />
     <Content Include="app\templates\app\datas_change.html" />
     <Content Include="app\templates\app\class_predict.html" />
     <Content Include="app\templates\app\subject_predict.html" />
