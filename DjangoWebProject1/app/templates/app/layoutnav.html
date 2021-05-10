@@ -104,12 +104,14 @@
 							</ul>
 						</div>
 					</li>
+					{% if user.is_authenticated %}
 					<li id="logout" class="btn-primary">
-						<a href="#logout">
+						<a href="{% url 'logout' %}">
 							<i class="ti-unlink" ></i>
 							<p>注销</p>
 						</a>
 					</li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>

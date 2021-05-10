@@ -2,6 +2,7 @@
 
 {% block content %}
 <body>
+    {% if user.is_authenticated %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -221,6 +222,11 @@
                         </div>           
                     </div>
                 </div>
+    {% else %}
+
+<h2>您无权访问该页面，若未登录请登录！</h2>
+<a class="f-20" href="{% url 'login' %}">Log in</a>
+{% endif %}
 {% endblock %}
 {% block scripts %}
      <script type="text/javascript">
@@ -305,4 +311,5 @@
         option && myChart.setOption(option);
     </script>
 </body>
+
 {% endblock %}
