@@ -1,21 +1,413 @@
 {% extends "app/layoutnav.html" %}
 
 {% block content %}
+<body>
+<div class="fulid-container">
+    <div class="row">
+        <div class="col-lg-8 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <h3>D</h3>
+                <div id="first" style="width: 100%;height:300px;"></div>
+            </div>
+        </div>
 
-<h2>{{ title }}.</h2>
-<h3>{{ message }}</h3>
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <h3>D</h3>
+                <div id="second" style="width: 100%;height:300px;"></div>
+            </div>
+        </div>
 
-<p>在此页面开发班级{{ title }}页面.</p>
+        
+                
+    </div>
 
+</div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <div id="third" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <div id="forth" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <div id="fifth" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+
+
+    </div> 
+
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <div id="sixth" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="card" style="min-height: 350px">
+                <div id="seventh" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+         
+
+    </div>
+</div>
+    <div id="first" style="width: 600px; height: 400px;"></div>
+    <div id="second" style="width: 600px; height: 400px;"></div>
+    <div id="third" style="width: 600px; height: 400px;"></div>
+    <div id="forth" style="width: 600px; height: 400px;"></div>
+    <div id="fifth" style="width: 1000px; height: 350px;"></div>
+    <div id="sixth" style="width: 400px; height: 400px;"></div>
 {% endblock %}
 {% block scripts %}
-<script type="text/javascript">
-    function navset() {
+    <script type="text/javascript">
+        function navset() {
         var navs = document.getElementById("predict")
         var navsin = document.getElementById("class_predict")
         navs.setAttribute("class", "active")
-        navsin.setAttribute("class", "active")
-    }
-    window.onload = navset();
+        navsin.setAttribute("class", "active")}
+       
+        window.onload=navset();
+    </script>
+
+    
+    <script type="text/javascript" src="echarts-gl.min.js">
+    
+    var chartDom = document.getElementById('first');
+    var myChart = echarts.init(chartDom);
+    var option;
+    option = {
+    tooltip: {},
+    backgroundColor: '#fff',
+    visualMap: {
+        show: false,
+        dimension: 2,
+        min: -1,
+        max: 1,
+        inRange: {
+            color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+        }
+    },
+    xAxis3D: {
+        type: 'value'
+    },
+    yAxis3D: {
+        type: 'value'
+    },
+    zAxis3D: {
+        type: 'value'
+    },
+    grid3D: {
+        viewControl: {
+            // projection: 'orthographic'
+        }
+    },
+    series: [{
+        type: 'surface',
+        wireframe: {
+            // show: false
+        },
+        equation: {
+            x: {
+                step: 0.05
+            },
+            y: {
+                step: 0.05
+            },
+            z: function (x, y) {
+                if (Math.abs(x) < 0.1 && Math.abs(y) < 0.1) {
+                    return '-';
+                }
+                return Math.sin(x * Math.PI) * Math.sin(y * Math.PI);
+            }
+        }
+    }]
+}
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
 </script>
+     
+    <script type="text/javascript">
+        var chartDom = document.getElementById('second');
+        var myChart = echarts.init(chartDom);
+        var option;
+
+        option = {
+    tooltip: {
+        trigger: 'item'
+    },
+    legend: {
+        top: '5%',
+        left: 'center'
+    },
+    series: [
+        {
+            name: '访问来源',
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
+            label: {
+                show: false,
+                position: 'center'
+            },
+            emphasis: {
+                label: {
+                    show: true,
+                    fontSize: '40',
+                    fontWeight: 'bold'
+                }
+            },
+            labelLine: {
+                show: false
+            },
+            data: [
+                {value: 1048, name: '搜索引擎'},
+                {value: 735, name: '直接访问'},
+                {value: 580, name: '邮件营销'},
+                {value: 484, name: '联盟广告'},
+                {value: 300, name: '视频广告'}
+            ]
+        }
+    ]
+};
+    window.onresize = function () { myChart.resize(); }
+    // 使用刚指定的配置项和数据显示图表。
+    option && myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    var chartDom = document.getElementById('third');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+    title: {
+        text: 'A',
+        subtext: 'hhhhh'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['及格', '未及格']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['数学', '语文', '外语', '综合', '总人数']
+    },
+    series: [
+        {
+            name: '及格',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        },
+        {
+            name: '未及格',
+            type: 'bar',
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        }
+    ]
+};
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
+</script>
+<script type="text/javascript">
+    var chartDom = document.getElementById('forth');
+    var myChart = echarts.init(chartDom);
+    var option;
+
+    option = {
+    title: {
+        text: 'B',
+        subtext: '哈哈哈哈哈'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['及格', '未及格']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['数学', '语文', '外语', '综合', '总人数']
+    },
+    series: [
+        {
+            name: '及格',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        },
+        {
+            name: '未及格',
+            type: 'bar',
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        }
+    ]
+};
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    var chartDom = document.getElementById('fifth');
+    var myChart = echarts.init(chartDom);
+    var option;
+    option = {
+    title: {
+        text: 'C',
+        subtext: '哈哈哈哈'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['及格', '未及格']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['数学', '语文', '外语', '综合', '总人数']
+    },
+    series: [
+        {
+            name: '及格',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        },
+        {
+            name: '未及格',
+            type: 'bar',
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        }
+    ]
+};
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
+   </script>
+
+<script type="text/javascript">
+    var chartDom = document.getElementById('sixth');
+    var myChart = echarts.init(chartDom);
+    var option;
+option = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '2015', '2016', '2017'],
+            ['Matcha Latte', 43.3, 85.8, 93.7],
+            ['Milk Tea', 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 72.4, 53.9, 39.1]
+        ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {type: 'bar'},
+        {type: 'bar'},
+        {type: 'bar'}
+    ]
+};
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
+
+</script>
+
+<script type="text/javascript">
+    var chartDom = document.getElementById('seventh');
+    var myChart = echarts.init(chartDom);
+    var option;
+option = {
+    legend: {},
+    tooltip: {},
+    dataset: {
+        source: [
+            ['product', '2015', '2016', '2017'],
+            ['Matcha Latte', 43.3, 85.8, 93.7],
+            ['Milk Tea', 83.1, 73.4, 55.1],
+            ['Cheese Cocoa', 86.4, 65.2, 82.5],
+            ['Walnut Brownie', 72.4, 53.9, 39.1]
+        ]
+    },
+    xAxis: {type: 'category'},
+    yAxis: {},
+    // Declare several bar series, each will be mapped
+    // to a column of dataset.source by default.
+    series: [
+        {type: 'bar'},
+        {type: 'bar'},
+        {type: 'bar'}
+    ]
+};
+window.onresize = function () { myChart.resize(); }
+// 使用刚指定的配置项和数据显示图表。
+option && myChart.setOption(option);
+
+</script>
+
+</body>
+
 {% endblock %}
