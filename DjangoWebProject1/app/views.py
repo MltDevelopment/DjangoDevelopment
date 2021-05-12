@@ -6,13 +6,14 @@ from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
 
+
 def overview(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
-    next_test=3
-    next_test_pre=((30-3)/30)*100
-    final_test=130
-    final_test_pre=((365-130)/365)*100
+    next_test=31-datetime.now().day
+    next_test_pre=((datetime.now().day)/31)*100
+    final_test=(6%datetime.now().month)*30+(7-datetime.now().day)
+    final_test_pre=((158-final_test)/158)*100
     return render(
         request,
         'app/index.html',
@@ -42,15 +43,65 @@ def datas_change(request):
 def datas_search(request):
     """Renders the datas page."""
     assert isinstance(request, HttpRequest)
+    q = request.GET.get('q')
+    #判别语句
+    if q=='20190440432':
+        return render(
+            request,
+            'app/datas_search.html',
+            {
+                'title':'Datas',
+                'message':'Database contrl page.',
+                'year':datetime.now().year,
+                'res':1,
+                'typecode':'has-success',
+                'searchmessage':'学号 '+q+' 搜索完成！'
+            }
+        )
+    return render(
+            request,
+            'app/datas_search.html',
+            {
+                'title':'Datas',
+                'message':'Database contrl page.',
+                'year':datetime.now().year,
+                'res':0,
+                'typecode':'',
+                'searchmessage':''
+            }
+        )
+
+def datas_add(request):
+    """Renders the predict page."""
+    assert isinstance(request, HttpRequest)
+    request.encoding='utf-8'
+    res=''
+    if request.method =="POST":
+        studentid = request.POST['studentid']
+        testid = request.POST['testid']
+        sub1 = request.POST['sub1']
+        sub2 = request.POST['sub2']
+        sub3 = request.POST['sub3']
+        sub4 = request.POST['sub4']
+        sub5 = request.POST['sub5']
+        sub6 = request.POST['sub6']
+        if request.POST.get('name') and request.POST.get('classid'):
+            name = request.POST['name']
+            classid = request.POST['classid']
+            res='学生'+name+'已成功入库！'
+        else:
+            res='学生'+studentid+'已成功添加记录！'
     return render(
         request,
-        'app/datas_search.html',
+        'app/datas_add.html',
         {
             'title':'Datas',
-            'message':'database contrl page.',
+            'message':'Database contrl page.',
             'year':datetime.now().year,
+            'res':res
         }
     )
+
 
 def class_predict(request):
     """Renders the predict page."""

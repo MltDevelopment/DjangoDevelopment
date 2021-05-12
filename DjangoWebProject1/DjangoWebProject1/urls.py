@@ -18,6 +18,7 @@ urlpatterns = [
     path('classanalysis/', views.class_analysis, name='classanalysis'),
     path('subjectanalysis/', views.subject_analysis, name='subjectanalysis'),
     path('detailanalysis/', views.detail_analysis, name='detailanalysis'),
+    path('datasadd/', views.datas_add, name='datasadd'),
     path('login/',
          LoginView.as_view
          (

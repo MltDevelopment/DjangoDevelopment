@@ -2,7 +2,6 @@
 
 {% block content %}
 <body>
-    {% if user.is_authenticated %}
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -111,7 +110,7 @@
 						<div class="col-lg-3 col-sm-6">
 							<div class="card card-circle-chart" data-background="color" data-color="orange" style="min-height: 350px">
 								<div class="header text-center">
-	                                <h5 class="title">距离下次考试</h5>
+	                                <h5 class="title">距离下次月考</h5>
 	                                <p class="description">还剩 {{next_test}} 天</p>
 	                            </div>
 								<div class="content">
@@ -120,7 +119,7 @@
 							</div>
 						</div>
 						<div class="col-lg-3 col-sm-6">
-							<div class="card card-circle-chart" data-background="color" data-color="brown" style="min-height: 350px">
+							<div class="card card-circle-chart" data-background="color" data-color="blue" style="min-height: 350px">
 								<div class="header text-center">
 	                                <h5 class="title">距离高考</h5>
 	                                <p class="description">还剩 {{final_test}} 天</p>
@@ -222,11 +221,7 @@
                         </div>           
                     </div>
                 </div>
-    {% else %}
 
-<h2>您无权访问该页面，若未登录请登录！</h2>
-<a class="f-20" href="{% url 'login' %}">Log in</a>
-{% endif %}
 {% endblock %}
 {% block scripts %}
      <script type="text/javascript">
