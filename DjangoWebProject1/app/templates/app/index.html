@@ -88,14 +88,14 @@
 										<div class="col-xs-7">
 											<div class="numbers">
 												<p>最近一次考试</p>
-												No.3
+												No.{{rank}}
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="card-footer">
                                     <div class="stats">
-                                        <i class="ti-medall"></i> 位列同系班第三位
+                                        <i class="ti-medall"></i> 位列同系班第{{rank}}位
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                             <div class="card" style="min-height: 485px">
                                 <div class="header card-header-text">
                                     <h4 class="title">学生成绩变化表</h4>
-                                    <p class="category">在第4次考试中变化较大的学生</p>
+                                    <p class="category">在第{{now_testid}}次考试中变化较大的学生</p>
                                 </div>
                                 <div class="content table-responsive">
                                     <table class="table table-hover">
@@ -143,77 +143,29 @@
 											<tr>
 												<th>学号</th>
 												<th>姓名</th>
-												<th>科目一</th>
-												<th>科目二</th>
-                                                <th>科目三</th>
-                                                <th>科目四</th>
-                                                <th>排名</th>
+												<th>数学</th>
+												<th>英语</th>
+                                                <th>语文</th>
+                                                <th>物理</th>
+                                                <th>化学</th>
+                                                <th>生物</th>
+                                                <th>总分</th>
 											</tr>
                                         </thead>
                                         <tbody>
+                                            {% for student in grade%}
                                             <tr>
-                                                <td>20190440432</td>
-                                                <td>叶子豪</td>
-                                                <td>90</td>
-                                                <td>20</td>
-                                                <td>60</td>
-                                                <td>90</td>
-                                                <td>90</td>
+                                                <td>{{student.studentNum}}</td>
+                                                <td>{{student.STName}}</td>
+                                                <td>{{student.Math3}}</td>
+                                                <td>{{student.English3}}</td>
+                                                <td>{{student.Chinese3}}</td>
+                                                <td>{{student.Physics3}}</td>
+                                                <td>{{student.Biology3}}</td>
+                                                <td>{{student.Chemistry3}}</td>
+                                                <td>{{student.Total}}</td>
                                             </tr>
-                                            <tr>
-                                                <td>20190440438</td>
-                                                <td>叶子黑</td>
-                                                <td>90</td>
-                                                <td>42</td>
-                                                <td>55</td>
-                                                <td>90</td>
-                                                <td>10</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20190440492</td>
-                                                <td>叶子白</td>
-                                                <td>90</td>
-                                                <td>30</td>
-                                                <td>62</td>
-                                                <td>90</td>
-                                                <td>930</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20190440433</td>
-                                                <td>叶子蓝</td>
-                                                <td>90</td>
-                                                <td>22</td>
-                                                <td>60</td>
-                                                <td>90</td>
-                                                <td>943242</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20190440434</td>
-                                                <td>叶子紫</td>
-                                                <td>90</td>
-                                                <td>20</td>
-                                                <td>50</td>
-                                                <td>90</td>
-                                                <td>6666</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20190440435</td>
-                                                <td>叶子红</td>
-                                                <td>90</td>
-                                                <td>20</td>
-                                                <td>60</td>
-                                                <td>90</td>
-                                                <td>5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>20190440436</td>
-                                                <td>叶子绿</td>
-                                                <td>86</td>
-                                                <td>20</td>
-                                                <td>60</td>
-                                                <td>90</td>
-                                                <td>4</td>
-                                            </tr>
+                                            {% endfor%}    
                                         </tbody>
                                     </table>
                                 </div>
@@ -262,7 +214,7 @@
             xAxis: {
                 type: 'category',
                 boundaryGap: false,
-                data: {{test_id|safe }}
+                data: {{testid|safe}}
             },
             yAxis: {
                 type: 'value'

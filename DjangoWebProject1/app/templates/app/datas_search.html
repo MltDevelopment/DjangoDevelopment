@@ -35,7 +35,7 @@
             <div class="col-lg-8 col-md-8" style="min-height:300px;">
                 <div class="card">
                     <div class="content">
-                        <h4 class="title">SearchData</h4>
+                        <h4 class="title">学生 <b>{{name}}</b> 的搜索结果</h4>
                         <div class="table-responsive">
                             <table class="table table-striped">
                                 <thead>
@@ -49,12 +49,12 @@
                                         <th class="text-right">化学</th>
                                         <th class="text-right">生物</th>
                                         <th class="text-right">总分</th>
-                                        <th class="text-right">排名</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% for i in search_res%}
                                     <tr>
-                                        <td class="text-center">1</td>
+                                        <td class="text-center">{{i.TEST_id}}</td>
                                         <td>
                                             <div class="checkbox">
                                                 <label>
@@ -62,87 +62,15 @@
                                                 </label>
                                             </div>
                                         </td>
-                                        <td>111</td>
-                                        <td>121</td>
-                                        <td>101</td>
-                                        <td class="text-right">101</td>
-                                        <td class="text-right">78</td>
-                                        <td class="text-right">88</td>
-                                        <td class="text-right">600</td>
-                                        <td class="text-right">88</td>
+                                        <td>{{i.Chinese3}}</td>
+                                        <td>{{i.Math3}}</td>
+                                        <td>{{i.English3}}</td>
+                                        <td class="text-right">{{i.Physics3}}</td>
+                                        <td class="text-right">{{i.Biology3}}</td>
+                                        <td class="text-right">{{i.Chemistry3}}</td>
+                                        <td class="text-right">{{i.Total}}</td>
                                     </tr>
-                                    <tr>
-                                        <td class="text-center">2</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="optionsCheckboxes" checked>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>111</td>
-                                        <td>121</td>
-                                        <td>101</td>
-                                        <td class="text-right">101</td>
-                                        <td class="text-right">78</td>
-                                        <td class="text-right">88</td>
-                                        <td class="text-right">600</td>
-                                        <td class="text-right">88</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">3</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="optionsCheckboxes" checked>
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>111</td>
-                                        <td>121</td>
-                                        <td>101</td>
-                                        <td class="text-right">101</td>
-                                        <td class="text-right">78</td>
-                                        <td class="text-right">88</td>
-                                        <td class="text-right">600</td>
-                                        <td class="text-right">88</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">4</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>111</td>
-                                        <td>121</td>
-                                        <td>101</td>
-                                        <td class="text-right">101</td>
-                                        <td class="text-right">78</td>
-                                        <td class="text-right">88</td>
-                                        <td class="text-right">600</td>
-                                        <td class="text-right">88</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">5</td>
-                                        <td>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="optionsCheckboxes">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>111</td>
-                                        <td>121</td>
-                                        <td>101</td>
-                                        <td class="text-right">101</td>
-                                        <td class="text-right">78</td>
-                                        <td class="text-right">88</td>
-                                        <td class="text-right">600</td>
-                                        <td class="text-right">88</td>
-                                    </tr>
+                                    {% endfor%}
                                 </tbody>
                             </table>
                         </div>
@@ -196,7 +124,7 @@
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: ['一模', '二模', '三模', '四模', '五模', '六模', '高考']
+            data: {{testid|safe}}
         },
         yAxis: {
             type: 'value'
@@ -205,34 +133,33 @@
             {
                 name: '语文',
                 type: 'line',
-                data: [120, 132, 111, 134, 90, 130, 129]
+                data: {{chinese}}
             },
             {
                 name: '数学',
                 type: 'line',
-                data: [132, 119, 121, 115, 131, 129, 111]
+                data: {{math}}
             },
             {
                 name: '英语',
                 type: 'line',
-                data: [140, 132, 101, 144, 120, 125, 110]
+                data: {{english}}
             },
             {
                 name: '物理',
                 type: 'line',
-                data: [80, 90, 101, 95, 86, 98, 80]
+                data: {{phy}}
             },
             {
                 name: '化学',
                 type: 'line',
-                data: [80, 70, 78, 76, 68, 88, 97]
+                data: {{bio}}
             },
             {
                 name: '生物',
                 type: 'line',
-                data: [68, 82, 88, 79, 90, 76, 69]
+                data: {{che}}
             }
-
         ]
     };
     window.onresize = function () { myChart.resize(); }
