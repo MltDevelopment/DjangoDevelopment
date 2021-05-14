@@ -5,15 +5,34 @@ Definition of views.
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpRequest
-
+from . import models
 
 def overview(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)
+    class_all=models.AllTest.objects.all().values()
+    print(class_all)
+    class_testid=[int(i.get('ClassTest')) for i in list(class_all)]
+    class_math=[int(i.get('Math2')) for i in list(class_all)]
+    class_chinese=[int(i.get('Chinese2')) for i in list(class_all)]
+    class_english=[int(i.get('English2')) for i in list(class_all)]
+    class_phy=[int(i.get('Physics2')) for i in list(class_all)]
+    class_bio=[int(i.get('Biology2')) for i in list(class_all)]
+    class_che=[int(i.get('Chemistry2')) for i in list(class_all)]
+    class_total=[int(i.get('total')) for i in list(class_all)]
+    class_trend=int(((class_total[-1]-class_total[-2])/class_total[-2])*100)
+    if class_trend>=0:
+        class_trend='+'+str(class_trend)
+    else:
+        class_trend='-'+str(class_trend)
+    print(class_trend)
+    now_testid=max(class_testid)
+    class_people=models.ClassGrade.objects.filter(TEST_id=3).count()
     next_test=31-datetime.now().day
     next_test_pre=((datetime.now().day)/31)*100
     final_test=(6%datetime.now().month)*30+(7-datetime.now().day)
     final_test_pre=((158-final_test)/158)*100
+    print(class_people)
     return render(
         request,
         'app/index.html',
@@ -24,6 +43,17 @@ def overview(request):
             'next_test_precent':int(next_test_pre),
             'final_test':final_test,
             'final_test_precent':int(final_test_pre),
+            'now_testid':now_testid,
+            'next_testid':now_testid+1,
+            'people':class_people,
+            'trend':class_trend,
+            'test_id':['第'+str(i)+'次考试' for i in class_testid],
+            'math':class_math,
+            'chinese':class_chinese,
+            'english':class_english,
+            'phy':class_phy,
+            'bio':class_bio,
+            'che':class_che,
         }
     )
 
@@ -89,8 +119,10 @@ def datas_add(request):
             name = request.POST['name']
             classid = request.POST['classid']
             res='学生'+name+'已成功入库！'
+            #数据库代码1
         else:
             res='学生'+studentid+'已成功添加记录！'
+            #数据库代码2
     return render(
         request,
         'app/datas_add.html',
@@ -146,18 +178,6 @@ def subject_analysis(request):
     return render(
         request,
         'app/subject_analysis.html',
-        {
-            'title':'Analysis',
-            'message':'Analysis page.',
-            'year':datetime.now().year,
-        }
-    )
-def detail_analysis(request):
-    """Renders the analysis page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/detail_analysis.html',
         {
             'title':'Analysis',
             'message':'Analysis page.',
